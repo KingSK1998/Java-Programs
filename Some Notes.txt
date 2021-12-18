@@ -1,0 +1,49 @@
+Abstract Class: 
+    ->  can't be instantiated 
+    ->  cannot create new instances/Object
+    ->  works as a base for subclasses
+	abstract class Book { 
+		String title;
+     	abstract void setTitle(String s);
+     	String getTitle() {return title;}				// LOOK
+	}
+	class MyBook extends Book{							// must be extended
+		void setTitle(String s) { this.title = s; }		// must be made
+	}
+	
+Interface:
+	->	contain only method signatures and fields
+	->	can be used to achieve Polymorphism
+	interface AdvancedArithmetic{ int divisor_sum(int n); }
+	class MyCalculator implements AdvancedArithmetic{	// must be implement
+		public int divisor_sum(int n) {					// must be public
+			int sum = 0;								// must be initialised
+			for(int i = 1; i <= n; i++) if(n%i == 0) sum += i;
+			return sum;
+		}
+	}
+	
+Method Overriding:
+	->	When a subclass inherits from a superclass
+	->	it also inherits its methods
+	->	however, it can also override the superclass methods 
+	->	as well as declare and implement new ones
+	class Sports{
+		String getName(){ return "Generic Sports"; }
+		void getNumberOfTeamMembers(){ System.out.println( "Each team has n players in " + getName() ); }
+	}
+	class Soccer extends Sports{
+		@Override						// should use
+		String getName(){ 				// must be same parameter
+			return "Soccer Class"; 		// must be same return type
+		}	
+		// as those of the method inherited from the supertype
+		@Override
+		void getNumberOfTeamMembers() {	System.out.println("Each team has 11 players in "+ getName()); }
+	}
+	
+Super Keyword:
+	->	When a method in a subclass overrides a method in superclass 
+	->	possible to call overridden method using super keyword
+	->	super.func() to call function func(),calls method defined in superclass
+
