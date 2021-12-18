@@ -1,18 +1,20 @@
 package com.example.pdfgenerator.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfDocument;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
-import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PDFGeneratorService {
@@ -43,11 +45,12 @@ public class PDFGeneratorService {
 
     // Reading existing PDF and Sending Compressed PDF
     public void compressPdfFileSize(HttpServletResponse response) throws IOException {
-        PdfReader originalPDF = new PdfReader(new FileInputStream("C:\\Users\\aaa\\Downloads\\PDF TEST\\Upload\\Java_Tech_Lounge.pdf"));
+        PdfReader originalPDF = new PdfReader(
+                new FileInputStream("C:\\Users\\aaa\\Downloads\\PDF TEST\\Upload\\Java_Tech_Lounge.pdf"));
         PdfStamper compressed = new PdfStamper(originalPDF, response.getOutputStream());
 
         int total = originalPDF.getNumberOfPages() + 1;
-        for ( int i=1; i<total; i++) {
+        for (int i = 1; i < total; i++) {
             originalPDF.setPageContent(i + 1, originalPDF.getPageContent(i + 1));
         }
 

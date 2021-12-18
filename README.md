@@ -10,3 +10,5 @@
     * int Queue
     * Generic DS for Student
 
+PDF Generator ->
+    Can generate and compress PDFS

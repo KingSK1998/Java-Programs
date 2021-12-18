@@ -5,25 +5,18 @@ import com.aspose.pdf.optimization.OptimizationOptions;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 @Service
 public class AsposePdfService {
 
-    // IS function me
-    // Jo Hatana vo hta liyo
-    // Maine sara code isi me daal diya
-    // Laptop hang ho gya
-    // One line at a time chalana
-
-    // Ye Input Line -- Ise mat delete karna - Line 28
-//    Document doc = new Document("C:\\Users\\aaa\\Downloads\\PDF TEST\\Upload\\Java_Tech_Lounge.pdf");
+    // Document doc = new Document("C:\\Users\\aaa\\Downloads\\PDF
+    // TEST\\Upload\\Java_Tech_Lounge.pdf");
     // If you want to upload pdf and then change it from web
     // Check HttpServletRequest Method
 
     // Ye output line h - Line 93
-//    doc.save(response.getOutputStream());
+    // doc.save(response.getOutputStream());
     public void compressPDF(HttpServletResponse response) throws IOException {
         Document doc = new Document("C:\\Users\\aaa\\Downloads\\PDF TEST\\Upload\\Java_Tech_Lounge.pdf");
 
@@ -32,39 +25,36 @@ public class AsposePdfService {
         // Initialize OptimizationOptions object
         OptimizationOptions opt = new OptimizationOptions();
 
-// Enable image compression
-// Set the quality and resolution of images in PDF file
+        // Enable image compression
+        // Set the quality and resolution of images in PDF file
         opt.getImageCompressionOptions().setCompressImages(true);
         opt.getImageCompressionOptions().setImageQuality(10);
         opt.getImageCompressionOptions().setMaxResolution(150);
         opt.getImageCompressionOptions().setResizeImages(true);
         doc.optimizeResources(opt);
 
-
         // Either
-// Unembed all fonts in PDF
+        // Unembed all fonts in PDF
         opt.setUnembedFonts(true);
 
-//OR
-// only keep embedded fonts for used characters
+        // OR
+        // only keep embedded fonts for used characters
         opt.setSubsetFonts(true);
 
-// link duplicate streams
+        // link duplicate streams
         opt.setLinkDuplcateStreams(false);
 
-// Remove unused streams
+        // Remove unused streams
         opt.setRemoveUnusedStreams(false);
 
-// Remove unused objects
+        // Remove unused objects
         opt.setRemoveUnusedObjects(false);
 
         doc.optimizeResources(opt);
 
         // Iterate through each page and annotation
-        for (Page page : doc.getPages())
-        {
-            for (Annotation annotation : page.getAnnotations())
-            {
+        for (Page page : doc.getPages()) {
+            for (Annotation annotation : page.getAnnotations()) {
                 // Either flatten the annotation
                 annotation.flatten();
 
@@ -74,10 +64,8 @@ public class AsposePdfService {
         }
 
         // Flatten Form fields
-        if (doc.getForm().getFields().length > 0)
-        {
-            for (Field item : doc.getForm().getFields())
-            {
+        if (doc.getForm().getFields().length > 0) {
+            for (Field item : doc.getForm().getFields()) {
                 item.flatten();
             }
         }
@@ -92,5 +80,6 @@ public class AsposePdfService {
         }
 
         doc.save(response.getOutputStream());
+        doc.close();
     }
 }
