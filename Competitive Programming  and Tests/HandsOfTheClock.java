@@ -1,5 +1,5 @@
 /*******************************************************************************
- * SOURCE: Appeared in Tech Mahindra Mindtree
+ * SOURCE: Appeared in Mindtree
  * AUTHOR: Shivam Kashyap - 28/Dec/2021
  * 
  * ---------------------------------------------------------------------------
